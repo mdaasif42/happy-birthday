@@ -1,0 +1,456 @@
+.messageSection {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: radial-gradient(circle at center, #FFF4F6 0%, #FFFDFE 100%);
+  overflow: hidden;
+}
+
+/* Rose petals background */
+.petalsContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.petal {
+  position: absolute;
+  top: -20px;
+  width: 8px;
+  height: 12px;
+  background: rgba(255, 92, 138, 0.4);
+  border-radius: 50% 50% 50% 0;
+  will-change: transform, opacity;
+  animation: petalFall var(--petal-duration) var(--petal-delay) linear infinite;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(-20px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(110dvh) translateX(var(--petal-sway)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* 3D Envelope Scene */
+.scene {
+  width: 92%;
+  max-width: 420px;
+  height: 76dvh;
+  max-height: 590px;
+  min-height: 460px;
+  perspective: 1500px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.cardContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.cardFront,
+.cardBack {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(224, 62, 102, 0.1);
+}
+
+/* FRONT SIDE (Envelope UI) */
+.cardFront {
+  background: linear-gradient(135deg, #FFF0F2 0%, #FFE3E8 100%);
+  border: 1px solid rgba(255, 92, 138, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  overflow: hidden;
+  pointer-events: auto;
+}
+.cardFront.flipped {
+  pointer-events: none;
+}
+
+.envelopeBorder {
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(212, 175, 55, 0.4);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.floralCorner {
+  width: 100px;
+  height: 100px;
+}
+
+.envelopeBadge {
+  position: absolute;
+  top: 36px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 6px 18px;
+  border-radius: 50px;
+  color: var(--gold);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.envelopeStar {
+  margin-right: 4px;
+  vertical-align: middle;
+  animation: pulseHeart 1.5s infinite alternate ease-in-out;
+}
+
+.envelopeContent {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+  margin-top: 20px;
+}
+
+.envelopeHeading {
+  font-family: var(--font-cursive);
+  font-size: clamp(40px, 10vw, 52px);
+  color: var(--deep-rose);
+  text-shadow: 0 2px 10px rgba(208, 46, 89, 0.08);
+}
+
+.envelopeSub {
+  font-family: var(--font-sans);
+  color: var(--light-text);
+  font-size: 13px;
+  letter-spacing: 1.2px;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+/* Premium Open Button Styling */
+.openButton {
+  position: relative;
+  background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+  border: 2px solid var(--gold);
+  border-radius: 50px;
+  padding: 14px 36px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(233, 59, 104, 0.25);
+  transition: all 0.3s ease;
+  margin-top: 24px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.openHeartIcon {
+  font-size: 16px;
+  animation: heartBeat 1.2s infinite ease-in-out;
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.25); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.25); }
+  70% { transform: scale(1); }
+}
+
+/* BACK SIDE (Handwritten Note Parchment) */
+.cardBack {
+  background: #FFFFFF;
+  border: 1px solid rgba(255, 92, 138, 0.15);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(224, 62, 102, 0.04), 0 15px 40px rgba(224, 62, 102, 0.08);
+  pointer-events: none;
+}
+.cardBack.flipped {
+  pointer-events: auto;
+}
+
+.cardBackContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scrollableLetterContent {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 8px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.scrollableLetterContent::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollableLetterContent::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 3px;
+}
+.scrollableLetterContent::-webkit-scrollbar-thumb {
+  background: rgba(233, 59, 104, 0.35);
+  border-radius: 3px;
+}
+.scrollableLetterContent::-webkit-scrollbar-thumb:hover {
+  background: rgba(233, 59, 104, 0.6);
+}
+
+/* Polaroid Container */
+.polaroidContainer {
+  background: white;
+  padding: 6px 6px 18px;
+  border-radius: 2px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 130px;
+  margin: 0 auto 8px;
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.polaroidContainer:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.photo {
+  width: 118px;
+  height: 118px;
+  object-fit: cover;
+  border-radius: 1px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.photoPlaceholder {
+  width: 118px;
+  height: 118px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FFF9FA;
+  color: var(--light-text);
+  font-family: var(--font-body);
+  font-size: 11px;
+  text-align: center;
+  border: 1px dashed rgba(255, 92, 138, 0.3);
+}
+
+.placeholderCameraIcon {
+  font-size: 24px;
+  color: var(--rose);
+  margin-bottom: 2px;
+}
+
+.polaroidCaption {
+  font-family: var(--font-cursive);
+  font-size: 16px;
+  color: var(--dark-text);
+  text-align: center;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.messageHeading {
+  font-family: var(--font-cursive);
+  font-size: clamp(24px, 5.5vw, 30px);
+  color: var(--deep-rose);
+  margin-bottom: 4px;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(208, 46, 89, 0.05);
+}
+
+.headingHeartIcon {
+  color: var(--rose);
+  font-size: 0.82em;
+  vertical-align: middle;
+  margin-left: 4px;
+  animation: pulseHeart 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseHeart {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+
+.messageBody {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 3.2vw, 14.5px);
+  line-height: 1.6;
+  color: var(--dark-text);
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.signature {
+  font-family: var(--font-cursive);
+  font-size: 22px;
+  color: var(--rose);
+  text-align: right;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.signatureStarIcon {
+  color: var(--gold);
+  font-size: 13px;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+/* Transition Button */
+.nextSectionButton {
+  background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(255, 92, 138, 0.35);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px auto 0;
+  min-height: 44px;
+  flex-shrink: 0;
+}
+
+.nextSectionButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(255, 92, 138, 0.5);
+}
+
+.cameraBtnIcon {
+  font-size: 15px;
+}
+
+/* Heart burst particles */
+.heartBurst {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.heartParticle {
+  position: absolute;
+  will-change: transform, opacity;
+  animation: heartBurstAnim var(--hb-duration) ease-out forwards;
+}
+
+.heartParticleIcon {
+  color: var(--rose);
+  font-size: 22px;
+}
+
+@keyframes heartBurstAnim {
+  0% {
+    transform: translate(var(--hb-sx), var(--hb-sy)) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--hb-ex), var(--hb-ey)) scale(1.55);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .messageSection {
+    padding: 16px 12px;
+  }
+  .scene {
+    height: 72dvh;
+    max-height: 520px;
+    min-height: 380px;
+  }
+  .cardBack {
+    padding: 16px;
+  }
+  .polaroidContainer {
+    width: 110px;
+    margin-bottom: 6px;
+    padding: 4px 4px 14px;
+  }
+  .photo {
+    width: 102px;
+    height: 102px;
+  }
+  .photoPlaceholder {
+    width: 102px;
+    height: 102px;
+  }
+  .polaroidCaption {
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .messageHeading {
+    font-size: 20px;
+    margin-bottom: 2px;
+  }
+  .messageBody {
+    line-height: 1.5;
+    font-size: 12px;
+  }
+  .signature {
+    margin-top: 2px;
+    font-size: 18px;
+  }
+  .nextSectionButton {
+    margin: 8px auto 0;
+    padding: 8px 24px;
+    font-size: 13px;
+    min-height: 38px;
+  }
+  .floralCorner {
+    width: 80px;
+    height: 80px;
+  }
+}

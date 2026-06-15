@@ -1,0 +1,347 @@
+.cakeSection {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 20px;
+  background: radial-gradient(circle at center, #FFF4F6 0%, #FFFDFE 100%);
+  overflow: hidden;
+}
+
+.instructionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 5;
+}
+
+.instruction {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 3.8vw, 17px);
+  color: var(--light-text);
+  text-align: center;
+  max-width: 400px;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.instructionContent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.micIcon {
+  color: var(--rose);
+  font-size: 20px;
+  animation: pulseMic 1.2s infinite alternate ease-in-out;
+}
+
+.micIconError {
+  color: var(--gold);
+  font-size: 20px;
+}
+
+@keyframes pulseMic {
+  0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(233, 59, 104, 0.4)); }
+  100% { transform: scale(1.3); filter: drop-shadow(0 0 8px rgba(233, 59, 104, 0.7)); }
+}
+
+/* Voice Visualizer Rings & Wave */
+.visualizerContainer {
+  position: relative;
+  width: 80px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visualizerRing {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(233, 59, 104, 0.2);
+  background: radial-gradient(circle, rgba(233, 59, 104, 0.08) 0%, transparent 75%);
+  pointer-events: none;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.visualizerRingOuter {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 1px dashed rgba(233, 59, 104, 0.15);
+  pointer-events: none;
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+}
+
+.visualizerCenter {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.waveBar {
+  width: 4px;
+  background: linear-gradient(180deg, var(--rose), var(--deep-rose));
+  border-radius: 3px;
+  transition: height 0.08s ease-out;
+}
+
+/* ======== CAKE ======== */
+.cakeContainer {
+  position: relative;
+  width: 300px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 20px 40px rgba(184, 29, 71, 0.18));
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cakeSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 2;
+  filter: drop-shadow(0 8px 16px rgba(184, 29, 71, 0.12));
+}
+
+/* Candle row positioned perfectly on the SVG top tier */
+.candleRow {
+  position: absolute;
+  top: 30px; /* Top of SVG Tier (68px) minus Candle Height (38px) = 30px */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  width: 105px;
+  z-index: 4;
+}
+
+.candle {
+  position: relative;
+  width: 9px;
+  height: 38px;
+  border-radius: 4px 4px 0 0;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.4);
+}
+
+.candle:nth-child(odd) { background: linear-gradient(180deg, #FFFFFF, var(--rose)); }
+.candle:nth-child(even) { background: linear-gradient(180deg, #FFFFFF, var(--gold)); }
+
+.candleStripes {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 4px,
+    rgba(255, 255, 255, 0.3) 4px,
+    rgba(255, 255, 255, 0.3) 8px
+  );
+  pointer-events: none;
+}
+
+/* Flame */
+.flame {
+  position: absolute;
+  top: -21px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 13px;
+  height: 20px;
+  border-radius: 50% 50% 30% 30%;
+  background: radial-gradient(#FFFFFF 0%, #FFD700 35%, #FF5100 75%, transparent 100%);
+  animation: flicker 0.25s infinite alternate ease-in-out;
+  box-shadow: 0 0 10px #FFD700, 0 0 20px rgba(255, 81, 0, 0.6), 0 0 35px rgba(255, 81, 0, 0.4);
+  z-index: 5;
+}
+
+@keyframes flicker {
+  0% { transform: translateX(-50%) scaleX(0.85) scaleY(1.02) rotate(-3deg); }
+  50% { transform: translateX(-50%) scaleX(1.15) scaleY(0.93) rotate(3deg); }
+  100% { transform: translateX(-50%) scaleX(0.9) scaleY(1.05) rotate(-5deg); }
+}
+
+/* Smoke puff when candle is blown */
+.smoke {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.smokePuff {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(220, 220, 220, 0.7);
+  animation: smokeRise 1s ease-out forwards;
+}
+
+.smokePuff:nth-child(2) {
+  animation-delay: 0.1s;
+  width: 5px;
+  height: 5px;
+}
+
+.smokePuff:nth-child(3) {
+  animation-delay: 0.2s;
+  width: 4px;
+  height: 4px;
+}
+
+@keyframes smokeRise {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-35px) scale(2.2);
+  }
+}
+
+/* Wish Container & Text */
+.wishContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  z-index: 5;
+  margin-top: 10px;
+}
+
+.wishText {
+  font-family: var(--font-cursive);
+  font-size: clamp(34px, 8.5vw, 48px);
+  color: var(--deep-rose);
+  text-shadow: 0 2px 10px rgba(184, 29, 71, 0.12);
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.wishStar {
+  font-size: clamp(20px, 5vw, 28px);
+  color: var(--gold);
+  animation: spinStar 8s linear infinite;
+}
+
+@keyframes spinStar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Transition Button */
+.nextSectionButton {
+  background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+  border: none;
+  border-radius: 50px;
+  padding: 16px 44px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(233, 59, 104, 0.35);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+}
+
+.nextSectionButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(233, 59, 104, 0.5);
+}
+
+.giftBtnIcon {
+  font-size: 18px;
+  animation: wiggle 2s infinite ease-in-out;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+/* Confetti explosion */
+.confettiOverlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.confettiItem {
+  position: absolute;
+  will-change: transform, opacity;
+  animation: confettiExplode var(--anim-duration) ease-out forwards;
+}
+
+@keyframes confettiExplode {
+  0% {
+    transform: translate(var(--cx), var(--cy)) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--ex), var(--ey)) rotate(var(--rot)) scale(0.2);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .cakeContainer {
+    width: 260px;
+    height: 208px;
+  }
+  .candleRow {
+    top: 26px;
+    gap: 10px;
+    width: 90px;
+  }
+  .candle {
+    width: 7px;
+    height: 32px;
+  }
+  .flame {
+    width: 11px;
+    height: 16px;
+    top: -18px;
+  }
+  .nextSectionButton {
+    padding: 14px 34px;
+    font-size: 15px;
+  }
+}

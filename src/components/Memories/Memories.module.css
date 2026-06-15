@@ -1,0 +1,256 @@
+.memoriesSection {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+  background: radial-gradient(circle at center, #FFF4F6 0%, #FFFDFE 100%);
+  overflow: hidden;
+}
+
+.sectionTitle {
+  font-family: var(--font-cursive);
+  font-size: clamp(34px, 8.5vw, 54px);
+  color: var(--deep-rose);
+  text-shadow: 0 2px 10px rgba(208, 46, 89, 0.08);
+  text-align: center;
+}
+
+.cameraTitleIcon {
+  color: var(--rose);
+  font-size: clamp(24px, 6vw, 36px);
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+  animation: rotateCamera 4s infinite ease-in-out;
+}
+
+@keyframes rotateCamera {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+
+/* 3D Stack Carousel Container */
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  height: 420px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stackWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Polaroid Card Stack */
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 12px 12px 64px; /* White margin bottom for writing */
+  box-shadow: 0 12px 30px rgba(224, 62, 102, 0.08);
+  border: 1px solid rgba(255, 92, 138, 0.12);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  transform-origin: bottom center;
+}
+
+.slide:active {
+  cursor: grabbing;
+}
+
+.slideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  background: #fbfbfb;
+}
+
+.slidePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FFF9FA;
+  color: var(--light-text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  gap: 8px;
+  border: 1px dashed rgba(255, 92, 138, 0.3);
+  border-radius: 2px;
+}
+
+.placeholderCamera {
+  font-size: 36px;
+  color: var(--rose);
+  opacity: 0.7;
+}
+
+/* Handwritten Polaroid Label */
+.polaroidCaptionArea {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  background: #ffffff;
+  border-radius: 0 0 6px 6px;
+}
+
+.polaroidCaptionText {
+  font-family: var(--font-cursive);
+  font-size: clamp(16px, 3.8vw, 19px);
+  color: var(--dark-text);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Navigation arrows positioned around the deck */
+.navArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 92, 138, 0.15);
+  color: var(--rose);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(224, 62, 102, 0.08);
+  transition: all 0.3s ease;
+  z-index: 50;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navArrow:hover {
+  transform: translateY(-50%) scale(1.1);
+  background: var(--white);
+  border-color: var(--rose);
+  box-shadow: 0 6px 20px rgba(255, 92, 138, 0.25);
+  color: var(--deep-rose);
+}
+
+.prevArrow {
+  left: 0px;
+}
+
+.nextArrow {
+  right: 0px;
+}
+
+/* Dots indicator */
+.dotsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0;
+  margin-top: 10px;
+}
+
+.dot {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255, 92, 138, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 8px;
+  min-height: 8px;
+}
+
+.dot.active {
+  width: 24px;
+  background: var(--rose);
+}
+
+.dot:not(.active) {
+  width: 8px;
+}
+
+.dot:hover:not(.active) {
+  background: rgba(255, 92, 138, 0.4);
+}
+
+/* Transition Button */
+.nextSectionButton {
+  background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+  border: none;
+  border-radius: 50px;
+  padding: 12px 32px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(255, 92, 138, 0.35);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+  min-height: 44px;
+  z-index: 10;
+}
+
+.nextSectionButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(255, 92, 138, 0.5);
+}
+
+.musicBtnIcon {
+  font-size: 15px;
+}
+
+/* Hide nav arrows on small mobile to favor swipe action */
+@media (max-width: 480px) {
+  .navArrow {
+    display: none;
+  }
+  .stackWrapper {
+    max-width: 290px;
+    height: 330px;
+  }
+  .carouselWrapper {
+    height: 360px;
+  }
+}

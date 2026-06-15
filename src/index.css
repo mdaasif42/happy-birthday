@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  --rose: #E93B68;
+  --deep-rose: #B81D47;
+  --pink-light: #FFE6EB;
+  --gold: #B38F24;
+  --purple: #8E44AD;
+  --deep-purple: #4A154B;
+  --cream: #FFFDFE;
+  --dark: #FFF0F2;
+  --white: #FFFFFF;
+  --dark-text: #1C0F12;
+  --light-text: #4E383C;
+  --glass: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  
+  --font-cursive: 'Dancing Script', cursive;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Outfit', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+  
+  --gold-glow: 0 4px 15px rgba(179, 143, 36, 0.2);
+  --rose-glow: 0 4px 20px rgba(233, 59, 104, 0.15);
+  --shadow-premium: 0 20px 45px rgba(224, 62, 102, 0.08);
+  --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #FFF0F2 0%, #FFFDFE 100%);
+  background-attachment: fixed;
+  color: var(--dark-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--deep-rose);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rose);
+}

@@ -1,0 +1,407 @@
+.musicSection {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 40px 20px;
+  background: radial-gradient(circle at center, #FFF4F6 0%, #FFFDFE 100%);
+  overflow: hidden;
+}
+
+/* Background equalizer bars */
+.eqBackground {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  opacity: 0.12;
+  pointer-events: none;
+  height: 200px;
+}
+
+.eqBar {
+  width: 16px;
+  background: linear-gradient(180deg, var(--rose), var(--gold));
+  border-radius: 4px 4px 0 0;
+  will-change: height;
+  height: 20px; /* Default static height when paused */
+  transition: height 0.3s ease;
+}
+
+/* Active animations when playing */
+.eqBar.animate {
+  animation: eqPulse 1.2s ease-in-out infinite alternate;
+}
+
+.eqBar:nth-child(1).animate { animation-duration: 1.1s; }
+.eqBar:nth-child(2).animate { animation-duration: 0.8s; }
+.eqBar:nth-child(3).animate { animation-duration: 1.0s; }
+.eqBar:nth-child(4).animate { animation-duration: 0.9s; }
+.eqBar:nth-child(5).animate { animation-duration: 1.15s; }
+
+@keyframes eqPulse {
+  0% { height: 25px; }
+  100% { height: 160px; }
+}
+
+.sectionTitle {
+  font-family: var(--font-cursive);
+  font-size: clamp(28px, 7vw, 48px);
+  color: var(--deep-rose);
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(184, 29, 71, 0.08);
+  z-index: 1;
+}
+
+.titleMusicIcon {
+  color: var(--rose);
+  font-size: clamp(22px, 5vw, 32px);
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+  animation: floatMusic 3s infinite ease-in-out;
+}
+
+@keyframes floatMusic {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Player card */
+.playerCard {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(233, 59, 104, 0.15);
+  border-radius: 32px;
+  padding: 40px 32px;
+  max-width: 380px;
+  width: 92%;
+  margin: 0 auto;
+  box-shadow: 0 15px 35px rgba(224, 62, 102, 0.08);
+}
+
+/* Album Art Container */
+.albumArtContainer {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto 28px;
+  box-shadow: 0 10px 30px rgba(224, 62, 102, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.albumArt {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.albumPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--light-text);
+  width: 100%;
+  height: 100%;
+}
+
+.placeholderMusicIcon {
+  font-size: 56px;
+}
+
+/* Song info */
+.songInfo {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.songTitle {
+  font-family: var(--font-sans);
+  font-size: clamp(18px, 4.5vw, 20px);
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.songMusicIcon {
+  color: var(--rose);
+  font-size: 15px;
+  margin-left: 6px;
+  animation: floatMusic 2s infinite ease-in-out;
+}
+
+.songArtist {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--light-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.songHeartIcon {
+  color: var(--rose);
+  font-size: 12px;
+  margin-left: 6px;
+  animation: pulseHeart 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseHeart {
+  0% { transform: scale(1); filter: drop-shadow(0 0 1px rgba(233, 59, 104, 0.2)); }
+  100% { transform: scale(1.18); filter: drop-shadow(0 0 6px rgba(233, 59, 104, 0.4)); }
+}
+
+/* Progress bar */
+.progressContainer {
+  margin-bottom: 28px;
+}
+
+.progressBar {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background: rgba(233, 59, 104, 0.15);
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rose), var(--deep-rose));
+  border-radius: 2px;
+  position: relative;
+  transition: width 0.1s linear;
+}
+
+.progressThumb {
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+  box-shadow: 0 0 8px rgba(233, 59, 104, 0.4);
+}
+
+.timeRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.timeText {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--light-text);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.controlBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--light-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.controlBtn:hover {
+  color: var(--deep-rose);
+  transform: scale(1.1);
+}
+
+.controlBtn.active {
+  color: var(--rose);
+}
+
+.controlBtnSmall {
+  composes: controlBtn;
+  font-size: 20px;
+}
+
+.controlBtnMed {
+  composes: controlBtn;
+  font-size: 24px;
+}
+
+/* Play/Pause center button */
+.playPauseBtn {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  box-shadow: 0 8px 25px rgba(233, 59, 104, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.playPauseBtn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 35px rgba(233, 59, 104, 0.5);
+}
+
+.playPauseBtn:active {
+  transform: scale(0.94);
+}
+
+.playPauseBtn.playing {
+  animation: playPulse 2s ease-in-out infinite;
+}
+
+@keyframes playPulse {
+  0%, 100% {
+    box-shadow: 0 8px 25px rgba(233, 59, 104, 0.35);
+  }
+  50% {
+    box-shadow: 0 8px 38px rgba(233, 59, 104, 0.65);
+  }
+}
+
+.volumeToggleBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: var(--light-text);
+  transition: all 0.2s ease;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.volumeToggleBtn:hover {
+  transform: scale(1.15);
+  color: var(--deep-rose);
+}
+
+.volumeToggleBtn.muted {
+  color: var(--rose);
+}
+
+.heartBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: var(--light-text);
+  transition: all 0.2s ease;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.heartBtn:hover {
+  transform: scale(1.2);
+  color: var(--deep-rose);
+}
+
+.heartBtn.liked {
+  color: var(--rose);
+  animation: heartPop 0.4s ease;
+}
+
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+/* Heart burst mini particles */
+.heartBurstMini {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+}
+
+.heartMini {
+  position: absolute;
+  font-size: 14px;
+  color: var(--rose);
+  will-change: transform, opacity;
+  animation: heartFlyOut 0.8s ease-out forwards;
+}
+
+@keyframes heartFlyOut {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--fly-x), var(--fly-y)) scale(1);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .playerCard {
+    padding: 32px 18px;
+    border-radius: 24px;
+  }
+  .controls {
+    gap: 12px;
+  }
+  .playPauseBtn {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
+    font-size: 20px;
+  }
+  .controlBtn, .volumeToggleBtn, .heartBtn {
+    min-width: 38px;
+    min-height: 38px;
+    padding: 4px;
+    font-size: 18px;
+  }
+}
